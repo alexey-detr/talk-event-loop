@@ -50,7 +50,6 @@ body {
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: normal;
-  text-transform: uppercase;
   text-shadow: none;
   word-wrap: break-word; }
 
@@ -149,7 +148,8 @@ body {
   font-family: Hasklig, monospace;
   line-height: 1.2em;
   word-wrap: break-word;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15); }
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 8px; }
 
 .reveal code {
   font-family: Hasklig, monospace;
@@ -157,8 +157,11 @@ body {
 
 .reveal pre code {
   display: block;
-  font-size: 0.4em;
-  word-wrap: normal; }
+  padding: 18px;
+  overflow: auto;
+  max-height: 600px;
+  word-wrap: normal;
+  border-radius: 8px; }
 
 .reveal table {
   margin: auto;

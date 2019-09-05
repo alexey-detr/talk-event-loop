@@ -1577,6 +1577,10 @@ $controlsArrowAngleActive: 36deg;
 	margin: initial;
 }
 
+.reveal .hljs-ln {
+	width: 100%;
+}
+
 .reveal .hljs-ln-code,
 .reveal .hljs-ln-numbers {
 	padding: 0;
@@ -1590,8 +1594,17 @@ $controlsArrowAngleActive: 36deg;
 	vertical-align: top;
 }
 
-.reveal .hljs[data-line-numbers]:not([data-line-numbers=""]) tr:not(.highlight-line) {
-	opacity: 0.4;
+.reveal .hljs[data-line-numbers]:not([data-line-numbers=""]) tr:not(.highlight-line),
+.reveal .hljs[data-line-numbers].highlight-lines tr:not(.highlight-line)
+{
+	opacity: 0.3;
+}
+
+.reveal .hljs[data-line-numbers]:not([data-line-numbers=""]) tr.highlight-line,
+.reveal .hljs[data-line-numbers].highlight-lines tr.highlight-line
+{
+	font-weight: bold;
+	background: linear-gradient(to right, rgba(75, 157, 255, 0.13) 90%, rgba(0, 41, 121, 0));
 }
 
 

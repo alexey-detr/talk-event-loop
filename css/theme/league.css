@@ -5,23 +5,22 @@
  *
  * Copyright (C) 2011-2012 Hakim El Hattab, http://hakim.se
  */
-@import url(../../lib/font/league-gothic/league-gothic.css);
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+@import url(../../lib/font/cabin/cabin.css);
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: #1c1e20;
-  background: -moz-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #555a5f), color-stop(100%, #1c1e20));
-  background: -webkit-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
-  background: -o-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
-  background: -ms-radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
-  background: radial-gradient(center, circle cover, #555a5f 0%, #1c1e20 100%);
+  background: #2b2e31;
+  background: -moz-radial-gradient(center, circle cover, #656b72 0%, #2b2e31 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #656b72), color-stop(100%, #2b2e31));
+  background: -webkit-radial-gradient(center, circle cover, #656b72 0%, #2b2e31 100%);
+  background: -o-radial-gradient(center, circle cover, #656b72 0%, #2b2e31 100%);
+  background: -ms-radial-gradient(center, circle cover, #656b72 0%, #2b2e31 100%);
+  background: radial-gradient(center, circle cover, #656b72 0%, #2b2e31 100%);
   background-color: #2b2b2b; }
 
 .reveal {
-  font-family: "Lato", sans-serif;
+  font-family: Cabin, sans-serif;
   font-size: 40px;
   font-weight: normal;
   color: #eee; }
@@ -52,28 +51,27 @@ body {
 .reveal h6 {
   margin: 0 0 20px 0;
   color: #eee;
-  font-family: "League Gothic", Impact, sans-serif;
+  font-family: Cabin, sans-serif;
   font-weight: normal;
   line-height: 1.2;
   letter-spacing: normal;
-  text-transform: uppercase;
   text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
   word-wrap: break-word; }
 
 .reveal h1 {
-  font-size: 3.77em; }
+  font-size: 80px; }
 
 .reveal h2 {
-  font-size: 2.11em; }
+  font-size: 64px; }
 
 .reveal h3 {
-  font-size: 1.55em; }
+  font-size: 48px; }
 
 .reveal h4 {
-  font-size: 1em; }
+  font-size: 32px; }
 
 .reveal h1 {
-  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 20px 20px rgba(0, 0, 0, 0.15); }
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 20px 20px rgba(0, 0, 0, 0.15); }
 
 /*********************************************
  * OTHER
@@ -155,7 +153,8 @@ body {
   font-family: Hasklig, monospace;
   line-height: 1.2em;
   word-wrap: break-word;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15); }
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 8px; }
 
 .reveal code {
   font-family: Hasklig, monospace;
@@ -163,8 +162,11 @@ body {
 
 .reveal pre code {
   display: block;
-  font-size: 0.4em;
-  word-wrap: normal; }
+  padding: 18px;
+  overflow: auto;
+  max-height: 600px;
+  word-wrap: normal;
+  border-radius: 8px; }
 
 .reveal table {
   margin: auto;
