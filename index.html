@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Event Loop in Node.js</title>
+    <title>Event Loop in JavaScript</title>
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/theme/league.css">
 
     <!-- Theme used for syntax highlighting of code -->
-<!--    <link rel="stylesheet" href="lib/css/docco.css">-->
+    <!--    <link rel="stylesheet" href="lib/css/docco.css">-->
     <link rel="stylesheet" href="lib/css/xcode.css">
 
     <!-- Printing and PDF exports -->
@@ -24,6 +24,10 @@
     </script>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         .columns-2 {
             display: grid;
             grid-template-columns: auto auto;
@@ -35,6 +39,14 @@
             grid-template-columns: auto auto;
             grid-gap: 100px;
             width: 80%;
+            margin: 0 auto;
+        }
+
+        .columns-2-extra-narrow {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-gap: 100px;
+            width: 50%;
             margin: 0 auto;
         }
 
@@ -58,16 +70,55 @@
             border: 2px solid #ddd;
             margin: 16px 0;
             border-radius: 6px;
+            background-color: rgba(221, 221, 221, 0.1);
+        }
+
+        .blocks-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .block-small {
+            width: 60px;
+            height: 40px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            position: relative;
+            background-color: rgba(221, 221, 221, 0.1);
+        }
+
+        .arrow-right-side-right {
+            margin-right: 37px;
+        }
+
+        .arrow-right-side-right::after {
+            content: "→";
+            line-height: 27px;
+            color: #ddd;
+            right: -40px;
+            position: absolute;
+        }
+
+        .text-align-left {
+            text-align: left;
+        }
+
+        ul li {
+            list-style-position: outside;
+            list-style-type: "\27A4";
+            padding-left: 30px;
+        }
+
+        ol li {
+            padding-left: 20px;
         }
     </style>
-
-    <!--    <link rel="stylesheet" href="css/prism.css" data-manual>-->
 </head>
 <body class="line-numbers">
 <div class="reveal">
     <div class="slides">
-        <section>
-            <h1>Event Loop in Node.js</h1>
+        <section class="title-slide">
+            <h1>Event Loop in JavaScript</h1>
             <footer>Alexey Ponomarev, JavaScript developer</footer>
             <aside class="notes">
                 Hi, I’m Alexey, and I’m working closely with JavaScript since 2014 and today I want to tell about my
@@ -75,7 +126,7 @@
             </aside>
         </section>
 
-        <section>
+        <section class="narrow-slide">
             <h2>What’s the point?</h2>
             <ul>
                 <li>Concurrency</li>
@@ -422,22 +473,22 @@
                 data-trim
                 data-line-numbers
             >
-const fs = require('fs');
-const request = require('request');
-let val1;
-let val2;
- 
-fs.readFile('/tmp/nine', (err, data) => {
-  val1 = data;
-  console.log(val1);
-});
- 
-request('https://alexey.detr.us/val', (err, data) => {
-  val2 = data.body;
-  setTimeout(() => {
-    console.log(val2);
-  }, 3000);
-});
+                const fs = require('fs');
+                const request = require('request');
+                let val1;
+                let val2;
+                 
+                fs.readFile('/tmp/nine', (err, data) => {
+                  val1 = data;
+                  console.log(val1);
+                });
+                 
+                request('https://alexey.detr.us/val', (err, data) => {
+                  val2 = data.body;
+                  setTimeout(() => {
+                    console.log(val2);
+                  }, 3000);
+                });
             </code></pre>
             <div class="fragment fragment-highlight-line" data-line-numbers="6"></div>
             <div class="fragment fragment-highlight-line" data-line-numbers="11"></div>
@@ -451,7 +502,7 @@ request('https://alexey.detr.us/val', (err, data) => {
         <section>
             <h1>
                 Node.js is <strong>more</strong> than<br />
-                just a JavaScript
+                just JavaScript
             </h1>
         </section>
 
@@ -531,6 +582,144 @@ request('https://alexey.detr.us/val', (err, data) => {
 
         <section>
             <h2>Event loop and phases</h2>
+
+            <div class="columns-2-extra-narrow">
+                <div class="text-align-left">
+                    <div>&nbsp;</div>
+                    <div>Timers</div>
+                    <div>Callbacks</div>
+                    <div>Poll</div>
+                    <div>Check</div>
+                </div>
+                <div class="text-align-left fragment">
+                    <div>Queues</div>
+                    <div class="blocks-row">
+                        <div class="block-small"></div>
+                        <span>&nbsp;</span>
+                    </div>
+                    <div class="blocks-row">
+                        <div class="block-small arrow-right-side-right"></div>
+                        <div class="block-small arrow-right-side-right"></div>
+                        <div class="block-small"></div>
+                        <span>&nbsp;</span>
+                    </div>
+                    <div class="blocks-row">
+                        <div class="block-small arrow-right-side-right"></div>
+                        <div class="block-small"></div>
+                        <span>&nbsp;</span>
+                    </div>
+                    <div class="blocks-row">
+                        <div class="block-small arrow-right-side-right"></div>
+                        <div class="block-small arrow-right-side-right"></div>
+                        <div class="block-small"></div>
+                        <span>&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section data-background="image/03_order.jpg" data-background-size="contain">
+            <aside class="notes">
+            </aside>
+        </section>
+
+        <section>
+            <h2>Order control</h2>
+
+            <ul>
+                <li>
+                    <code>setTimeout(..., 0)</code>
+                </li>
+                <li>
+                    <code>setImmediate(...)</code>
+                </li>
+                <li>
+                    <code>process.nextTick(...)</code>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+                <h2>Task</h2>
+
+                <ol>
+                    <li>
+                        Read a remote data
+                    </li>
+                    <li>
+                        Do something with this data
+                    </li>
+                    <li>
+                        Print the processed result
+                    </li>
+                </ol>
+        </section>
+
+        <section data-background="image/04_dog.jpg" data-background-size="contain">
+            <aside class="notes">
+            </aside>
+        </section>
+
+        <section>
+            <h2>Tasks Runner</h2>
+            <pre><code
+                class="language-js"
+                data-trim
+                data-line-numbers
+            >
+                let val;
+                 
+                const tasks = {
+                  function output() {
+                    console.log(val);
+                  },
+                };
+                 
+                request('http://alexey.detr.us/val', (err, data) => {
+                  val = Number.parseInt(data.body, 10);
+                 
+                  Object.keys(tasks).forEach(key => {
+                    tasks[key]();
+                  });
+                });
+            </code></pre>
+            <aside class="notes">
+            </aside>
+        </section>
+
+        <section>
+            <h1>
+                setTimeout
+            </h1>
+        </section>
+
+        <section>
+            <h2>setTimeout</h2>
+            <p>
+                Divide by 3, print
+            </p>
+            <div class="columns-2-extra-narrow">
+                <pre><code
+                    class="language-js"
+                    data-trim
+                    data-line-numbers
+                >
+                    const tasks = {
+                      output() {
+                        console.log(val);
+                      },
+                     
+                      process() {
+                        val /= 3;
+                      },
+                    };
+                </code></pre>
+                <div>
+
+                </div>
+            </div>
+            <aside class="notes">
+            </aside>
         </section>
     </div>
 </div>
