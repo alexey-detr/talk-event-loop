@@ -20,7 +20,7 @@ body {
   background-color: #2b2b2b; }
 
 .reveal {
-  font-family: Cabin, sans-serif;
+  font-family: "SF Compact Rounded", sans-serif;
   font-size: 40px;
   font-weight: normal;
   color: #eee; }
@@ -51,7 +51,7 @@ body {
 .reveal h6 {
   margin: 0 0 20px 0;
   color: #eee;
-  font-family: Cabin, sans-serif;
+  font-family: "SF Compact Rounded", sans-serif;
   font-weight: normal;
   line-height: 1.2;
   letter-spacing: normal;
@@ -143,21 +143,37 @@ body {
 .reveal q {
   font-style: italic; }
 
+.reveal .pre-code {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: 20px auto;
+  text-align: left;
+  font-family: "SF Mono", monospace;
+  font-size: 22px;
+  line-height: 26px;
+  word-wrap: break-word;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  text-transform: none; }
+
 .reveal pre {
   display: block;
   position: relative;
   width: 90%;
   margin: 20px auto;
   text-align: left;
-  font-size: 0.55em;
-  font-family: Hasklig, monospace;
-  line-height: 1.2em;
+  font-family: "SF Mono", monospace;
+  font-size: 22px;
+  line-height: 26px;
   word-wrap: break-word;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   border-radius: 8px; }
 
 .reveal code {
-  font-family: Hasklig, monospace;
+  font-family: "SF Mono", monospace;
+  font-size: 22px;
+  line-height: 26px;
   text-transform: none; }
 
 .reveal pre code {

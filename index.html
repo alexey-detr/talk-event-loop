@@ -78,24 +78,51 @@
             align-items: center;
         }
 
+
         .block-small {
-            width: 60px;
-            height: 40px;
+            width: 100px;
+            height: 60px;
             border: 2px solid #ddd;
             border-radius: 6px;
             position: relative;
             background-color: rgba(221, 221, 221, 0.1);
+            font-weight: 300;
+        }
+
+        .block-wrap-heavy {
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #ddd;
+            background-color: rgba(221, 221, 221, 0.1);
+            display: flex;
+        }
+
+        .block-wrap-light {
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px dotted #ddd;
+            background-color: rgba(221, 221, 221, 0.1);
+            display: flex;
+        }
+
+        .block-small-light {
+            background-color: rgb(88, 138, 73);
+        }
+
+        .block-small-heavy {
+            background-color: rgb(153, 53, 58);
         }
 
         .arrow-right-side-right {
-            margin-right: 37px;
+            margin-right: 32px;
         }
 
         .arrow-right-side-right::after {
             content: "→";
-            line-height: 27px;
             color: #ddd;
-            right: -40px;
+            line-height: 52px;
+            right: -38px;
+            font-size: 50px;
             position: absolute;
         }
 
@@ -112,6 +139,20 @@
         ol li {
             padding-left: 20px;
         }
+
+        .strike-block {
+            position: relative;
+        }
+
+        .strike-block::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            border: 2px solid #dda19b;
+        }
     </style>
 </head>
 <body class="line-numbers">
@@ -121,19 +162,19 @@
             <h1>Event Loop in JavaScript</h1>
             <footer>Alexey Ponomarev, JavaScript developer</footer>
             <aside class="notes">
-                Hi, I’m Alexey, and I’m working closely with JavaScript since 2014 and today I want to tell about my
-                experience with Node.js platform.
+                Hi, I'm Alexey, and I'm working closely with JavaScript since 2014 and today I want to tell about my
+                experience with Node.js and other platforms.
             </aside>
         </section>
 
         <section class="narrow-slide">
-            <h2>What’s the point?</h2>
+            <h2>What's the point?</h2>
             <ul>
                 <li>Concurrency</li>
-                <li>Event Loop and Node.js</li>
+                <li>Event Loop, Node.js and Browsers</li>
             </ul>
             <aside class="notes">
-                Let’s start. A few words about this talk. When I started to work with Node.js I got a quite big project.
+                Let's start. A few words about this talk. When I started to work with Node.js I got a quite big project.
                 To be honest it was hard to understand all these asynchronous operations everywhere. A bit later I
                 figured out how to work with it, but I was still wondering how it works under the hood.
             </aside>
@@ -141,7 +182,7 @@
 
         <section data-background="image/01_cats.jpg" data-background-size="contain">
             <aside class="notes">
-                So in the first place we’ll take a look onto the concurrency topic…
+                So in the first place we'll take a look onto the concurrency topic…
             </aside>
         </section>
 
@@ -170,7 +211,7 @@
             </div>
 
             <aside class="notes">
-                Let’s remember how we were writing our first code. I bet it was like a sequence commands which were
+                Let's remember how we were writing our first code. I bet it was like a sequence commands which were
                 running strictly one by one, first line, second line and so on…
                 But we were growing up and we wanted to use our hardware more effectively, for example read from disk
                 and send something by network simultaneously.
@@ -178,8 +219,8 @@
                 Then we got a multithreading. But with this powerful tool we also got a bunch of problems like thread
                 syncing, deadlocks, race conditions.
 
-                But actually there is a compromise to run tasks simultaneously and don’t think about multi-threading
-                problems. And it’s an asynchronous tasks running.
+                But actually there is a compromise to run tasks simultaneously and don't think about multi-threading
+                problems. And it's an asynchronous tasks running.
             </aside>
         </section>
 
@@ -187,11 +228,11 @@
             <h2>Asynchronous in action</h2>
             <ol>
                 <li>Print a file content</li>
-                <li>Print a remote value with 3 seconds delay</li>
+                <li>Print a remote value after 3 seconds of delay</li>
             </ol>
             <aside class="notes">
                 Here is an example of two asynchronous tasks.
-                Let’s figure out how we are able to do that with JavaScript.
+                Let's figure out how we are able to do that with JavaScript.
             </aside>
         </section>
 
@@ -305,150 +346,125 @@
         </section>
 
         <section>
-            <h1>Event loop</h1>
-
-        </section>
-
-        <section>
-            <h2>Event loop and phases</h2>
-
-            <div class="columns-2-extra-narrow">
-                <div class="text-align-left">
-                    <div>&nbsp;</div>
-                    <div>Timers</div>
-                    <div>Callbacks</div>
-                    <div>Poll</div>
-                    <div>Check</div>
+            <h1>v8 and Node.js</h1>
+            <div class="columns-3">
+                <div>
+                    <div class="block fragment" data-fragment-index="1">v8 Engine</div>
+                    <div class="block fragment" data-fragment-index="2">
+                        Built-in Event Loop
+                        <div class="fragment" data-parent-class="strike-block" data-fragment-index="3"></div>
+                    </div>
                 </div>
-                <div class="text-align-left fragment">
-                    <div>Queues</div>
-                    <div class="blocks-row">
-                        <div class="block-small"></div>
-                        <span>&nbsp;</span>
-                    </div>
-                    <div class="blocks-row">
-                        <div class="block-small arrow-right-side-right"></div>
-                        <div class="block-small arrow-right-side-right"></div>
-                        <div class="block-small"></div>
-                        <span>&nbsp;</span>
-                    </div>
-                    <div class="blocks-row">
-                        <div class="block-small arrow-right-side-right"></div>
-                        <div class="block-small"></div>
-                        <span>&nbsp;</span>
-                    </div>
-                    <div class="blocks-row">
-                        <div class="block-small arrow-right-side-right"></div>
-                        <div class="block-small arrow-right-side-right"></div>
-                        <div class="block-small"></div>
-                        <span>&nbsp;</span>
-                    </div>
+                <div class="fragment" data-fragment-index="6">
+                    <div class="block">Node.js bindings</div>
+                </div>
+                <div class="fragment" data-fragment-index="5">
+                    <div class="block">libuv's Event Loop</div>
                 </div>
             </div>
         </section>
 
-        <section data-background="image/03_order.jpg" data-background-size="contain">
-            <aside class="notes">
-            </aside>
-        </section>
-
         <section>
-            <h2>Order control</h2>
-
+            <h1>JavaScript in Browsers</h1>
+            <h2>
+                <del>libuv</del>
+                Web APIs
+            </h2>
             <ul>
-                <li>
-                    <code>setTimeout(..., 0)</code>
-                </li>
-                <li>
-                    <code>setImmediate(...)</code>
-                </li>
-                <li>
-                    <code>process.nextTick(...)</code>
-                </li>
+                <li>XHR / Fetch</li>
+                <li>Websockets</li>
+                <li>Observers (Intersection, Mutation, ...)</li>
+                <li>IndexedDB</li>
+                <li>Timers</li>
             </ul>
         </section>
 
         <section>
-            <h2>Task</h2>
-
-            <ol>
-                <li>
-                    Read a remote data
-                </li>
-                <li>
-                    Do something with this data
-                </li>
-                <li>
-                    Print the processed result
-                </li>
-            </ol>
-        </section>
-
-        <section data-background="image/04_dog.jpg" data-background-size="contain">
-            <aside class="notes">
-            </aside>
+            <h1>Queues</h1>
+            <ul>
+                <li>Tasks</li>
+                <li>Microtasks</li>
+            </ul>
         </section>
 
         <section>
-            <h2>Tasks Runner</h2>
-            <pre><code
-                class="language-js"
-                data-trim
-                data-line-numbers
-            >
-                let val;
-                 
-                const tasks = {
-                  function output() {
-                    console.log(val);
-                  },
-                };
-                 
-                request('http://alexey.detr.us/val', (err, data) => {
-                  val = Number.parseInt(data.body, 10);
-                 
-                  Object.keys(tasks).forEach(key => {
-                    tasks[key]();
-                  });
-                });
-            </code></pre>
-            <aside class="notes">
-            </aside>
-        </section>
-
-        <section>
-            <h1>
-                setTimeout
-            </h1>
-        </section>
-
-        <section>
-            <h2>setTimeout</h2>
-            <p>
-                Divide by 3, print
-            </p>
-            <div class="columns-2-extra-narrow">
-                <pre><code
-                    class="language-js"
-                    data-trim
-                    data-line-numbers
-                >
-                    const tasks = {
-                      output() {
-                        console.log(val);
-                      },
-                     
-                      process() {
-                        val /= 3;
-                      },
-                    };
-                </code></pre>
+            <h1>Tasks & microtasks</h1>
+            <div class="columns-2">
                 <div>
+                    <pre><code
+                        class="language-js"
+                        data-trim
+                        data-line-numbers
+                    >
+                        console.log('script start');
 
+                        setTimeout(() => {
+                          console.log('setTimeout');
+                        }, 0);
+
+                        Promise.resolve().then(() => {
+                          console.log('promise1');
+                        }).then(() => {
+                          console.log('promise2');
+                        });
+
+                        console.log('script end');
+                    </code></pre>
+                    <div class="fragment fragment-highlight-line" data-line-numbers="1" data-fragment-index="10"></div>
+                    <div class="fragment fragment-highlight-line" data-line-numbers="3" data-fragment-index="20"></div>
+                    <div class="fragment fragment-highlight-line" data-line-numbers="7" data-fragment-index="30"></div>
+                    <div class="fragment fragment-highlight-line" data-line-numbers="13" data-fragment-index="40"></div>
+                    <div class="fragment fragment-highlight-line" data-line-numbers="8" data-fragment-index="50"></div>
+                    <div class="fragment fragment-highlight-line" data-line-numbers="9" data-fragment-index="60"></div>
+                    <div class="fragment fragment-highlight-line" data-line-numbers="10" data-fragment-index="70"></div>
+                    <div class="fragment fragment-highlight-line" data-line-numbers="4" data-fragment-index="80"></div>
+                </div>
+                <div>
+                    <h3>Output</h3>
+                    <div class="pre-code hljs">
+                        <div class="fragment" data-fragment-index="10">1: script start</div>
+                        <div class="fragment" data-fragment-index="20"></div>
+                        <div class="fragment" data-fragment-index="30"></div>
+                        <div class="fragment" data-fragment-index="40">13: script end</div>
+                        <div class="fragment" data-fragment-index="50">8: promise1</div>
+                        <div class="fragment" data-fragment-index="60"></div>
+                        <div class="fragment" data-fragment-index="70">10: promise2</div>
+                        <div class="fragment" data-fragment-index="80">4: setTimeout</div>
+                    </div>
+                    <h3>Queues</h3>
+                    <div
+                        class="fragment" data-fragment-index="10"
+                        style="display: grid; grid-template-columns: repeat(4, auto); grid-gap: 10px; justify-items: center; justify-content: center"
+                    >
+                        <div class="block-wrap-heavy fragment fade-out" data-fragment-index="50">
+                            <div class="block-small">Main</div>
+                        </div>
+                        <div class="fragment fade-out" data-fragment-index="71">
+                            <div
+                                class="block-wrap-light fragment"
+                                data-fragment-index="30"
+                            >
+                                <div class="fragment" data-fragment-index="30">
+                                    <div class="block-small fragment fade-out" data-fragment-index="51">P1</div>
+                                </div>
+                                <div class="fragment" data-fragment-index="60">
+                                    <div class="block-small fragment fade-out" data-fragment-index="71">P2</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fragment fade-out" data-fragment-index="81">
+                            <div
+                                class="block-wrap-heavy fragment"
+                                data-fragment-index="20"
+                            >
+                                <div class="fragment" data-fragment-index="20">
+                                    <div class="block-small">T</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <aside class="notes">
-            </aside>
         </section>
     </div>
 </div>
@@ -463,7 +479,7 @@
         hash: true,
         slideNumber: true,
         fragments: true,
-        fragmentInURL: true,
+        // fragmentInURL: true,
         width: '100%',
         height: '100%',
         margin: 0.1,
@@ -494,6 +510,9 @@
                 codeElement.classList.add('highlight-lines');
                 Reveal.getPlugin('highlight').highlightLines(codeElement, fragment.dataset.lineNumbers);
             }
+            if (fragment.dataset.parentClass) {
+                fragment.parentNode.classList.add(fragment.dataset.parentClass);
+            }
         });
 
         Reveal.addEventListener('fragmenthidden', (params) => {
@@ -507,6 +526,9 @@
                 } else {
                     codeElement.classList.remove('highlight-lines');
                 }
+            }
+            if (fragment.dataset.parentClass) {
+                fragment.parentNode.classList.remove(fragment.dataset.parentClass);
             }
         });
     });

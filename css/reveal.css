@@ -1458,7 +1458,7 @@ body {
 
 .reveal .hljs[data-line-numbers]:not([data-line-numbers=""]) tr:not(.highlight-line),
 .reveal .hljs[data-line-numbers].highlight-lines tr:not(.highlight-line) {
-  opacity: 0.4;
+  opacity: 0.95;
   -webkit-filter: blur(1px);
           filter: blur(1px); }
 
