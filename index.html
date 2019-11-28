@@ -239,7 +239,7 @@
         </section>
 
         <section>
-            <h2>Code</h2>
+            <h2>Event loop</h2>
             <pre><code
                 class="language-js"
                 data-trim
@@ -273,9 +273,14 @@
 
         <section>
             <h1>
-                Node.js is <strong>more</strong> than<br />
-                just JavaScript
+                JavaScript is <strong>more</strong> than<br />
+                just a language
             </h1>
+        </section>
+
+        <section data-background="image/03_nodejs.png" data-background-size="50%">
+            <aside class="notes">
+            </aside>
         </section>
 
         <section>
@@ -345,6 +350,10 @@
                     <h3>Thread pool</h3>
                 </div>
             </div>
+            <aside class="notes">
+                libuv was developed specifically for Node.js, but nowadays it's used in other languages like
+                Julia or Luvit.
+            </aside>
         </section>
 
         <section>
@@ -366,6 +375,11 @@
             </div>
         </section>
 
+        <section data-background="image/04_browsers.png" data-background-size="80%">
+            <aside class="notes">
+            </aside>
+        </section>
+
         <section>
             <h1>JavaScript in Browsers</h1>
             <h2>
@@ -384,8 +398,8 @@
         <section>
             <h1>Queues</h1>
             <ul>
-                <li>Tasks</li>
-                <li>Microtasks</li>
+                <li><h2>Tasks</h2></li>
+                <li><h2>Microtasks</h2></li>
             </ul>
         </section>
 
@@ -473,12 +487,51 @@
             <h1>What's where</h1>
             <ul>
                 <li>setTimeout → tasks queue</li>
+                <li>Promise → microtasks queue</li>
                 <li>Mutation Observer API → microtasks queue</li>
+                <li>...</li>
             </ul>
             <p>
                 Can be found by experiments or by reading specs.
             </p>
         </section>
+
+        <section>
+            <h1>Thank you!</h1>
+            <h3>Links</h3>
+            <ol>
+                <li>
+                    <a href="http://docs.libuv.org/en/v1.x/design.html">
+                        libuv design overview
+                    </a>
+                </li>
+                <li>
+                    <a href="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/">
+                        Tasks, microtasks, queues and schedules
+                    </a>
+                </li>
+                <li>
+                    <a href="https://v8.dev/blog">
+                        v8 blog
+                    </a>
+                </li>
+            </ol>
+            <p>&nbsp;</p>
+            <h3>Additional info</h3>
+            <ol>
+                <li>
+                    <a href="https://alexey.detr.us/en/posts/2019/2019-01-05-move-from-promises-to-async-await/">
+                        Move from Promise to async/await
+                    </a>
+                </li>
+                <li>
+                    <a href="https://alexey.detr.us/en/posts/2019/2019-04-27-promise-and-async-await-mixing-errors-handling/">
+                        Promise and async/await errors handling
+                    </a>
+                </li>
+            </ol>
+        </section>
+
     </div>
 </div>
 
